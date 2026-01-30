@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>truntable</title>
+  <link rel="stylesheet" href="SpinToWinWheel.css">
+</head>
+<body>
+  <div class="container">
+    <div class="titleContainer">
+      <div class="switch text cursor-pointer">切換</div>
+      <input type="text" class="title text titleInput" id="titleInput" placeholder="轉盤名稱" readonly>
+      <div class="edit text cursor-pointer">編輯</div>
+    </div>
+    <div class="pointer"></div>
+    <div class="SpinToWinWheelcontainer">
+      <svg id="wheel" width="400" height="400" viewBox="0 0 400 400">
+        <g id="wheelSegments"></g>
+        <circle cx="200" cy="200" r="30" fill="white" stroke="#ddd" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="buttonContainer">
+      <div class="startButton">開始轉盤</div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="switchContainer">
+    <div class="backContainer">
+      <div class="back text cursor-pointer">返回</div>
+    </div>
+    <div class="addContainer cursor-pointer" id="addSpinToWinWheel">
+      <div class="text">+ 新增</div>
+    </div>
+    <!-- 轉盤列表容器 -->
+    <div class="SpinToWinWheelList" id="SpinToWinWheelList"></div>
+  </div>
+
+
+  <div class="editContainer">
+    <div class="editsubContainer">
+      <div class="editBack text cursor-pointer">完成</div>
+    </div>
+    
+    <!-- 項目列表 -->
+    <div class="editItemsList" id="editItemsList"></div>
+    
+    <!-- 新增項目按鈕 -->
+    <div class="addItemContainer cursor-pointer" id="addItem">
+      <div class="text">+ 新增項目</div>
+    </div>
+    
+    <!-- 機率總計顯示 -->
+    <div class="probabilityTotal" id="probabilityTotal">
+      總機率: <span id="totalProbability">0</span>%
+    </div>
+
+    <div class="simulationContainer" id="simulationContainer">
+      <div class="simulationButton cursor-pointer" id="simulationButton">
+        <div class="text">模擬測試</div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="SpinToWinWheel.js"></script>
+</html>

@@ -1,0 +1,1007 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.container {
+  position: absolute;
+  background-color: #f5f5f5;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.titleContainer,
+.backContainer,
+.edisubContainer {
+}
+
+.titleContainer {
+  background-color: #fff;
+  width: 100vw;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.text {
+  color: #007bff;
+  font-size: large;
+  margin: 5px;
+}
+
+.edit, .switch {
+  width: 60px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.switchContainer {
+  width: 70vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+  position: relative;
+  z-index: 99;
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s ease,
+    visibility 0.4s;
+}
+
+.switchContainer.show {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.backContainer {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.back {
+  width: 80px;
+  text-align: left;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 9;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.title {
+  text-align: center;
+  flex: 1;              
+}
+
+.titleInput {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.titleInput:focus {
+  outline: none;
+  cursor: text;
+  background-color: #f0f8ff;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.titleInput[readonly] {
+  cursor: pointer;
+}
+
+.SpinToWinWheelcontainer {
+  position: relative;
+  width: 100vw;
+  height: 400px;
+  margin: 0px auto 10px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+}
+
+.pointer {
+  position: relative;
+  margin-top: 10px;
+  left: 50%;
+  top: 2%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid #ff0000;
+  z-index: 5;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.buttonContainer {
+  width: 100vw;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.startButton {
+  width: 160px;
+  height: 60px;
+  background-color: #8284f0;
+  font-size: x-large;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.addContainer {
+  width: 80%;
+  height: 6vh;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 10px auto;
+}
+
+.editContainer {
+  width: 70vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99;
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s ease,
+    visibility 0.4s;
+  display: flex;
+  flex-direction: column;
+}
+
+.editContainer.show {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.editsubContainer {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 16px;
+}
+
+.editBack {
+  width: 80px;
+  text-align: right;
+  font-weight: 500;
+}
+
+.SpinToWinWheelList {
+  width: 100%;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: calc(100vh - 12vh - 6vh);
+}
+
+.SpinToWinWheelItem {
+  width: 90%;
+  margin: 10px auto;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SpinToWinWheelItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.SpinToWinWheelItem.active {
+  border: 2px solid #007bff;
+  background-color: #e7f3ff;
+}
+
+.SpinToWinWheelItemName {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.SpinToWinWheelItemDate {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+.SpinToWinWheelItemDelete {
+  color: #ff4444;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.SpinToWinWheelItemDelete:hover {
+  background-color: #ffe0e0;
+}
+
+.editItemsList {
+  width: 100%;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: calc(100vh - 30vh);
+  flex: 1;                /* 吃掉中間剩餘高度 */
+  overflow-y: auto;       /* 滾動只在這 */
+  background-color: #c0cdd8;
+}
+
+.editItem {
+  width: 90%;
+  margin: 10px auto;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.editItemRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.editItemColor {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editItemColor input[type="color"] {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+.editItemColor input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.editItemColor input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.editItemName {
+  flex: 1;
+}
+
+.editItemName input {
+  width: 100%;
+  height: 45px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.editItemName input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.editItemProbability {
+  width: 100px;
+}
+
+.editItemProbability input {
+  width: 100%;
+  height: 45px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.editItemProbability input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.editItemDelete {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff4444;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.editItemDelete:hover {
+  background-color: #ffe0e0;
+}
+
+.addItemContainer {
+  width: 90%;
+  height: 50px;
+  margin: 15px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 2px dashed #007bff;
+}
+
+.addItemContainer:hover {
+  background-color: #f0f8ff;
+}
+
+.probabilityTotal {
+  width: 90%;
+  margin: 15px auto;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#totalProbability {
+  color: #007bff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#totalProbability.valid {
+  color: #28a745;
+}
+
+#totalProbability.invalid {
+  color: #ff4444;
+}
+
+.editItemProbability input[type="number"]::-webkit-inner-spin-button,
+.editItemProbability input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#wheel {
+  transition: transform 6s cubic-bezier(0.05, 0.9, 0.4, 1);
+}
+
+.wheel-text {
+  fill: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-anchor: middle;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.simulationContainer {
+  width: 90%;
+  margin: 15px auto;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.simulationButton {
+  width: 100%;
+  height: 50px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.simulationButton:hover {
+  background-color: #218838;
+}
+
+.simulationControls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.simulationControls input[type="number"] {
+  flex: 1;
+  height: 45px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.simulationControls input[type="number"]:focus {
+  outline: none;
+  border-color: #28a745;
+}
+
+.simulationControlButton {
+  height: 45px;
+  padding: 0 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.simulationStartButton {
+  background-color: #28a745;
+}
+
+.simulationStartButton:hover {
+  background-color: #218838;
+}
+
+.simulationCloseButton {
+  background-color: #dc3545;
+}
+
+.simulationCloseButton:hover {
+  background-color: #c82333;
+}
+
+.simulationResult {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  max-height: 80vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  padding-top: 45px; /* 為關閉按鈕留出空間 */
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.simulationResultTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+.simulationResultItem {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border-left: 4px solid #007bff;
+}
+
+.simulationResultName {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.simulationResultStats {
+  font-size: 14px;
+  color: #666;
+}
+
+.simulationResultCount {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.simulationResultPercentage {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.simulationResultExpected {
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.simulationResultProgress {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #e7f3ff;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 500;
+  color: #007bff;
+}
+
+.simulationResultClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  z-index: 1;
+}
+
+.simulationResultClose:hover {
+  background-color: #c82333;
+}
+
+
+/* 平板尺寸 (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .switchContainer,
+  .editContainer {
+    width: 85vw;
+  }
+  
+  .simulationResult {
+    width: 250px;
+    right: 10px;
+  }
+}
+
+/* 手機尺寸 (小於 768px) */
+@media screen and (max-width: 768px) {
+  .titleContainer {
+    height: 8vh;
+  }
+  
+  .text {
+    font-size: medium;
+  }
+  
+  .switch,
+  .edit {
+    width: 15%;
+  }
+  
+  .title {
+    width: 70%;
+  }
+  
+  .titleInput {
+    font-size: medium;
+  }
+  
+  .switchContainer,
+  .editContainer {
+    width: 100vw;
+  }
+  
+  .SpinToWinWheelcontainer {
+    height: 350px;
+    width: 100vw;
+  }
+  
+  #wheel {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .pointer {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid #ff0000;
+  }
+  
+  .buttonContainer {
+    height: 15%;
+  }
+  
+  .startButton {
+    width: 140px;
+    height: 50px;
+    font-size: large;
+  }
+  
+  .SpinToWinWheelList {
+    max-height: calc(100vh - 14vh - 8vh);
+  }
+  
+  .SpinToWinWheelItem {
+    width: 95%;
+    padding: 12px;
+  }
+  
+  .SpinToWinWheelItemName {
+    font-size: 14px;
+  }
+  
+  .SpinToWinWheelItemDate {
+    font-size: 11px;
+  }
+  
+  .SpinToWinWheelItemDelete {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .editItemsList {
+    max-height: calc(100vh - 22vh);
+  }
+  
+  .editItem {
+    width: 95%;
+    padding: 12px;
+  }
+  
+  .editItemRow {
+    gap: 8px;
+  }
+  
+  .editItemColor {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .editItemColor input[type="color"] {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .editItemName input {
+    height: 40px;
+    font-size: 13px;
+  }
+  
+  .editItemProbability {
+    width: 80px;
+  }
+  
+  .editItemProbability input {
+    height: 40px;
+    font-size: 13px;
+  }
+  
+  .editItemDelete {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+  
+  .addContainer,
+  .addItemContainer {
+    width: 95%;
+    height: 45px;
+  }
+  
+  .editNameContainer,
+  .probabilityTotal,
+  .simulationContainer {
+    width: 95%;
+  }
+  
+  .simulationControls input[type="number"] {
+    height: 40px;
+    font-size: 13px;
+  }
+  
+  .simulationControlButton {
+    height: 40px;
+    padding: 0 15px;
+    font-size: 13px;
+  }
+  
+  .simulationResult {
+    /* width: calc(100vw - 20px); */
+    right: 10px;
+    left: 10px;
+    top: auto;
+    bottom: 10px;
+    transform: none;
+    max-height: 50vh;
+  }
+  
+  .simulationResultTitle {
+    font-size: 16px;
+  }
+  
+  .simulationResultItem {
+    margin: 8px 0;
+    padding: 8px;
+  }
+  
+  .simulationResultName {
+    font-size: 14px;
+  }
+  
+  .simulationResultStats {
+    font-size: 13px;
+  }
+  
+  .simulationResultExpected {
+    font-size: 11px;
+  }
+  
+  .wheel-text {
+    font-size: 12px;
+  }
+
+  .simulationResultClose {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    top: 8px;
+    right: 8px;
+  }
+  
+  .simulationResult {
+    padding-top: 40px;
+  }
+}
+
+/* 小型手機 (小於 480px) */
+@media screen and (max-width: 480px) {
+  .titleContainer {
+    height: 7vh;
+  }
+  
+  .text {
+    font-size: small;
+    margin: 3px;
+  }
+  
+  .switch,
+  .edit {
+    width: 18%;
+    font-size: 14px;
+  }
+  
+  .title {
+    width: 64%;
+  }
+  
+  .titleInput {
+    font-size: small;
+  }
+  
+  .SpinToWinWheelcontainer {
+    height: 300px;
+  }
+  
+  #wheel {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .pointer {
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 25px solid #ff0000;
+  }
+  
+  .startButton {
+    width: 120px;
+    height: 45px;
+    font-size: medium;
+  }
+  
+  .backContainer,
+  .editsubContainer {
+    height: 7vh;
+  }
+  
+  .addContainer,
+  .addItemContainer {
+    height: 40px;
+  }
+  
+  .SpinToWinWheelList {
+    max-height: calc(100vh - 14vh - 7vh);
+  }
+  
+  .editItemsList {
+    max-height: calc(100vh - 20vh);
+  }
+  
+  .editItemRow {
+    /* flex-wrap: wrap; */
+  }
+  
+  .editItemColor {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .editItemColor input[type="color"] {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .editItemName {
+    flex: 1;
+    min-width: calc(100% - 130px);
+  }
+  
+  .editItemName input {
+    height: 35px;
+    font-size: 12px;
+  }
+  
+  .editItemProbability {
+    width: 70px;
+  }
+  
+  .editItemProbability input {
+    height: 35px;
+    font-size: 12px;
+  }
+  
+  .editItemDelete {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+  
+  .simulationControls {
+    flex-direction: column;
+  }
+  
+  .simulationControls input[type="number"] {
+    width: 100%;
+  }
+  
+  .simulationControlButton {
+    width: 100%;
+  }
+  
+  .simulationResult {
+    max-height: 40vh;
+    top:10%
+  }
+  
+  .simulationResultTitle {
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+  
+  .simulationResultItem {
+    margin: 6px 0;
+    padding: 6px;
+  }
+  
+  .simulationResultName {
+    font-size: 13px;
+  }
+  
+  .simulationResultStats {
+    font-size: 12px;
+  }
+  
+  .simulationResultProgress {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .wheel-text {
+    font-size: 10px;
+  }
+
+  .simulationResultClose {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
+
+/* 橫向模式調整 */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+  .SpinToWinWheelcontainer {
+    height: 250px;
+  }
+  
+  #wheel {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .buttonContainer {
+    height: 12%;
+  }
+  
+  .startButton {
+    width: 110px;
+    height: 40px;
+    font-size: medium;
+  }
+  
+  .simulationResult {
+    max-height: 60vh;
+    width: 250px;
+    right: 10px;
+    left: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
