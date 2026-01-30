@@ -544,7 +544,7 @@ const titleInput = document.getElementById('titleInput');
 
 // 點擊時進入編輯模式
 titleInput.addEventListener('click', function() {
-  // this.removeAttribute('readonly');
+  this.removeAttribute('readonly');
   this.select();
 });
 
